@@ -30,8 +30,22 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
 
   const def = componentLibrary.find((c) => c.type === component.type)
 
+  const widthValue = String(component.props.width ?? '100%')
+  const widthMap: Record<string, string> = {
+    '25%': 'w-1/4',
+    '33%': 'w-1/3',
+    '50%': 'w-1/2',
+    '75%': 'w-3/4',
+    '100%': 'w-full',
+  }
+  const widthClass = widthMap[widthValue] ?? 'w-full'
+
   if (previewMode) {
-    return <CanvasItem type={component.type} props={component.props} />
+    return (
+      <div className={`${widthClass}`}>
+        <CanvasItem type={component.type} props={component.props} />
+      </div>
+    )
   }
 
   return (
@@ -40,7 +54,7 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
       style={style}
       {...attributes}
       {...listeners}
-      className={`relative group cursor-grab active:cursor-grabbing rounded-md transition-all ${
+      className={`${widthClass} relative group cursor-grab active:cursor-grabbing rounded-md transition-all ${
         isSelected ? 'ring-2 ring-spotify-green ring-offset-2 ring-offset-spotify-dark' : 'hover:ring-1 hover:ring-white/20'
       }`}
       onClick={(e) => {

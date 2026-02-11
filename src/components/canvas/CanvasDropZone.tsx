@@ -1,5 +1,5 @@
 import { useDroppable } from '@dnd-kit/core'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { SortableContext, rectSortingStrategy } from '@dnd-kit/sortable'
 import { useSandboxStore } from '@/stores/useSandboxStore'
 import { CanvasItemWrapper } from './CanvasItemWrapper'
 import { Layers } from 'lucide-react'
@@ -28,8 +28,8 @@ export function CanvasDropZone() {
           <p className="text-sm">Drag components from the left panel to start building your playlist page</p>
         </div>
       ) : (
-        <SortableContext items={ids} strategy={verticalListSortingStrategy}>
-          <div className="flex flex-col px-8 py-4">
+        <SortableContext items={ids} strategy={rectSortingStrategy}>
+          <div className="flex flex-wrap px-8 py-4">
             {canvas.map((component) => (
               <CanvasItemWrapper
                 key={component.id}

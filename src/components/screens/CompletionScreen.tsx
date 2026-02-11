@@ -76,10 +76,16 @@ export function CompletionScreen() {
                   No components placed
                 </div>
               ) : (
-                <div className="flex flex-col">
-                  {canvas.map((comp) => (
-                    <CanvasItem key={comp.id} type={comp.type} props={comp.props} />
-                  ))}
+                <div className="flex flex-wrap">
+                  {canvas.map((comp) => {
+                    const w = String(comp.props.width ?? '100%')
+                    const wMap: Record<string, string> = { '25%': 'w-1/4', '33%': 'w-1/3', '50%': 'w-1/2', '75%': 'w-3/4', '100%': 'w-full' }
+                    return (
+                      <div key={comp.id} className={wMap[w] ?? 'w-full'}>
+                        <CanvasItem type={comp.type} props={comp.props} />
+                      </div>
+                    )
+                  })}
                 </div>
               )}
             </div>
