@@ -48,20 +48,15 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
         selectComponent(component.id)
       }}
     >
-      {/* Drag handle indicator */}
-      <div className="absolute -left-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-        <div className="p-1 text-spotify-text-sub">
-          <GripVertical size={16} />
-        </div>
-      </div>
-
-      <div className="absolute -right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+      {/* Delete button - top right inside the component */}
+      <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <button
-          className="p-1 text-spotify-text-sub hover:text-red-400 transition-colors"
+          className="p-1.5 rounded-full bg-spotify-dark/80 text-spotify-text-sub hover:text-red-400 hover:bg-red-400/10 transition-colors"
           onClick={(e) => {
             e.stopPropagation()
             removeComponent(component.id)
           }}
+          onPointerDown={(e) => e.stopPropagation()}
         >
           <Trash2 size={14} />
         </button>
