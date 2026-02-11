@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:springpod.com)",
+      "WebSearch",
+      "Bash(npm create:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install react react-dom)",
+      "Bash(npm install -D vite @vitejs/plugin-react typescript @types/react @types/react-dom)",
+      "Bash(npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities zustand lucide-react framer-motion nanoid html-to-image)",
+      "Bash(npm install -D @tailwindcss/vite tailwindcss)",
+      "Bash(npx vite build)",
+      "Bash(gh auth status:*)",
+      "Bash(git --version:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

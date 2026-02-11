@@ -38,7 +38,9 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative group cursor-pointer rounded-md transition-all ${
+      {...attributes}
+      {...listeners}
+      className={`relative group cursor-grab active:cursor-grabbing rounded-md transition-all ${
         isSelected ? 'ring-2 ring-spotify-green ring-offset-2 ring-offset-spotify-dark' : 'hover:ring-1 hover:ring-white/20'
       }`}
       onClick={(e) => {
@@ -46,11 +48,11 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
         selectComponent(component.id)
       }}
     >
-      {/* Edit overlay with drag handle and delete */}
+      {/* Drag handle indicator */}
       <div className="absolute -left-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-        <button {...attributes} {...listeners} className="p-1 text-spotify-text-sub hover:text-white cursor-grab active:cursor-grabbing">
+        <div className="p-1 text-spotify-text-sub">
           <GripVertical size={16} />
-        </button>
+        </div>
       </div>
 
       <div className="absolute -right-8 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
