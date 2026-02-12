@@ -16,24 +16,24 @@ export function TipCard() {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[480px] max-w-[90vw]"
         >
-          <div className="bg-spotify-surface border border-spotify-green/30 rounded-xl p-5 shadow-2xl shadow-black/50">
+          <div className="bg-surface-3 border border-edge-accent/30 rounded-xl p-5 shadow-2xl shadow-black/40">
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-spotify-green/20 flex items-center justify-center shrink-0 mt-0.5">
-                <Lightbulb size={20} className="text-spotify-green" />
+              <div className="w-9 h-9 rounded-lg bg-accent-muted flex items-center justify-center shrink-0 mt-0.5">
+                <Lightbulb size={18} className="text-accent" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-lg">{activeTip.emoji}</span>
-                  <h4 className="text-sm font-bold text-spotify-green">{activeTip.title}</h4>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-base">{activeTip.emoji}</span>
+                  <h4 className="text-[13px] font-bold text-accent">{activeTip.title}</h4>
                 </div>
-                <p className="text-xs font-medium text-white/90 mb-2 italic">"{activeTip.principle}"</p>
-                <p className="text-xs text-spotify-text-sub leading-relaxed">{activeTip.description}</p>
+                <p className="text-[11px] font-medium text-ink/90 mb-2 italic leading-relaxed">"{activeTip.principle}"</p>
+                <p className="text-[11px] text-ink-secondary leading-relaxed">{activeTip.description}</p>
               </div>
               <button
                 onClick={dismissTip}
-                className="text-spotify-text-dim hover:text-white transition-colors shrink-0"
+                className="text-ink-muted hover:text-ink transition-colors duration-150 shrink-0 p-1 rounded-md hover:bg-surface-4 cursor-pointer"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
             </div>
           </div>

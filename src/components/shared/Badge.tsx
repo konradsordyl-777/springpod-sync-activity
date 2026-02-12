@@ -5,11 +5,11 @@ interface BadgeProps {
 
 export function Badge({ children, variant = 'green' }: BadgeProps) {
   const styles = {
-    green: 'bg-spotify-green text-spotify-black',
-    surface: 'bg-spotify-surface text-spotify-text-sub',
+    green: 'bg-accent text-surface-base',
+    surface: 'bg-surface-2 text-ink-tertiary border border-edge-subtle',
   }
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${styles[variant]}`}>
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold ${styles[variant]}`}>
       {children}
     </span>
   )

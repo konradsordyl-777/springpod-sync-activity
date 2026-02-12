@@ -8,18 +8,18 @@ interface Props {
 }
 
 export function PropertyControl({ definition, value, onChange }: Props) {
-  const { type, label, key } = definition
+  const { type, label } = definition
 
   return (
-    <div className="mb-3">
-      <label className="block text-xs font-medium text-spotify-text-sub mb-1.5">{label}</label>
+    <div>
+      <label className="block text-[11px] font-medium text-ink-tertiary mb-1.5">{label}</label>
 
       {type === 'text' && (
         <input
           type="text"
           value={String(value)}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full bg-spotify-dark border border-white/10 rounded-md px-3 py-1.5 text-sm text-white focus:outline-none focus:border-spotify-green transition-colors"
+          className="w-full bg-surface-base border border-edge rounded-md px-3 py-1.5 text-[13px] text-ink placeholder:text-ink-muted focus:outline-none focus:border-accent/50 transition-colors duration-150"
         />
       )}
 
@@ -27,7 +27,7 @@ export function PropertyControl({ definition, value, onChange }: Props) {
         <select
           value={String(value)}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full bg-spotify-dark border border-white/10 rounded-md px-3 py-1.5 text-sm text-white focus:outline-none focus:border-spotify-green"
+          className="w-full bg-surface-base border border-edge rounded-md px-3 py-1.5 text-[13px] text-ink focus:outline-none focus:border-accent/50 transition-colors duration-150"
         >
           {definition.options.map((opt) => (
             <option key={opt} value={opt}>{opt}</option>
@@ -44,7 +44,7 @@ export function PropertyControl({ definition, value, onChange }: Props) {
       )}
 
       {type === 'slider' && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <input
             type="range"
             min={definition.min ?? 0}
@@ -52,22 +52,22 @@ export function PropertyControl({ definition, value, onChange }: Props) {
             step={definition.step ?? 1}
             value={Number(value)}
             onChange={(e) => onChange(Number(e.target.value))}
-            className="flex-1 accent-spotify-green"
+            className="flex-1 accent-accent h-1"
           />
-          <span className="text-xs text-spotify-text-sub w-8 text-right">{value}</span>
+          <span className="text-[11px] text-ink-tertiary tabular-nums w-8 text-right">{value}</span>
         </div>
       )}
 
       {type === 'toggle' && (
         <button
           onClick={() => onChange(!value)}
-          className={`relative w-10 h-5 rounded-full transition-colors ${
-            value ? 'bg-spotify-green' : 'bg-spotify-surface-light'
+          className={`relative w-9 h-5 rounded-full transition-colors duration-150 cursor-pointer ${
+            value ? 'bg-accent' : 'bg-surface-4'
           }`}
         >
           <div
-            className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
-              value ? 'translate-x-5' : 'translate-x-0.5'
+            className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform duration-150 ${
+              value ? 'translate-x-4.5' : 'translate-x-0.5'
             }`}
           />
         </button>
@@ -79,10 +79,10 @@ export function PropertyControl({ definition, value, onChange }: Props) {
             <button
               key={s}
               onClick={() => onChange(s)}
-              className={`flex-1 px-2 py-1 text-xs rounded-md transition-colors ${
+              className={`flex-1 px-2 py-1 text-[11px] rounded-md transition-all duration-150 cursor-pointer ${
                 value === s
-                  ? 'bg-spotify-green text-spotify-black font-semibold'
-                  : 'bg-spotify-dark text-spotify-text-sub hover:bg-spotify-surface'
+                  ? 'bg-accent text-surface-base font-semibold'
+                  : 'bg-surface-2 border border-edge-subtle text-ink-tertiary hover:bg-surface-3 hover:text-ink-secondary'
               }`}
             >
               {s.charAt(0).toUpperCase() + s.slice(1)}

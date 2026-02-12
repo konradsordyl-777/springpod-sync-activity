@@ -24,9 +24,7 @@ export function CompletionScreen() {
 
   const userTypes = canvas.map((c) => c.type)
 
-  // Score: how many reference components are present
   const matched = referenceLayout.filter((type) => userTypes.includes(type))
-  const missing = referenceLayout.filter((type) => !userTypes.includes(type))
   const score = Math.round((matched.length / referenceLayout.length) * 100)
 
   const handleDownload = useCallback(async () => {
@@ -46,33 +44,34 @@ export function CompletionScreen() {
   }, [])
 
   return (
-    <div className="h-full overflow-y-auto bg-spotify-dark">
+    <div className="h-full overflow-y-auto bg-surface-base">
       <div className="max-w-6xl mx-auto px-8 py-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-10"
         >
-          <h1 className="text-3xl font-black text-white mb-2">Design Review</h1>
-          <p className="text-spotify-text-sub">Let's see how your playlist page compares to Spotify's design</p>
+          <h1 className="text-3xl font-black text-ink mb-2 tracking-tight">Design Review</h1>
+          <p className="text-sm text-ink-secondary">How your playlist page compares to Spotify's design</p>
         </motion.div>
 
         {/* Side by side comparison */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
           {/* User design */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
           >
-            <h2 className="text-sm font-semibold text-spotify-green mb-3 uppercase tracking-wider">Your Design</h2>
+            <h2 className="text-[11px] font-semibold text-accent mb-3 uppercase tracking-widest">Your Design</h2>
             <div
               ref={designRef}
-              className="bg-spotify-dark rounded-xl border border-white/10 min-h-[400px] overflow-hidden"
+              className="bg-surface-base rounded-xl border border-edge min-h-[400px] overflow-hidden"
             >
               {canvas.length === 0 ? (
-                <div className="flex items-center justify-center h-64 text-spotify-text-dim text-sm">
+                <div className="flex items-center justify-center h-64 text-ink-muted text-sm">
                   No components placed
                 </div>
               ) : (
@@ -93,12 +92,12 @@ export function CompletionScreen() {
 
           {/* Reference design */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.25, duration: 0.4 }}
           >
-            <h2 className="text-sm font-semibold text-spotify-text-sub mb-3 uppercase tracking-wider">Spotify Reference</h2>
-            <div className="bg-spotify-dark rounded-xl border border-white/10 min-h-[400px] overflow-hidden">
+            <h2 className="text-[11px] font-semibold text-ink-tertiary mb-3 uppercase tracking-widest">Spotify Reference</h2>
+            <div className="bg-surface-base rounded-xl border border-edge min-h-[400px] overflow-hidden">
               <div className="flex flex-col">
                 {referenceLayout.map((type, i) => (
                   <CanvasItem key={`${type}-${i}`} type={type} props={getDefaultProps(type)} />
@@ -110,34 +109,34 @@ export function CompletionScreen() {
 
         {/* Feedback */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
+          transition={{ delay: 0.35, duration: 0.4 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10"
         >
           {/* Score */}
-          <div className="bg-spotify-surface rounded-xl p-6 text-center">
-            <div className="text-5xl font-black text-spotify-green mb-2">{score}%</div>
-            <div className="text-sm text-spotify-text-sub">Component Match</div>
-            <div className="text-xs text-spotify-text-dim mt-1">
+          <div className="bg-surface-2 border border-edge-subtle rounded-xl p-6 text-center">
+            <div className="text-5xl font-black text-accent mb-2 tabular-nums">{score}%</div>
+            <div className="text-[13px] text-ink-secondary font-medium">Component Match</div>
+            <div className="text-[11px] text-ink-muted mt-1 tabular-nums">
               {matched.length}/{referenceLayout.length} reference components used
             </div>
           </div>
 
           {/* Components used */}
-          <div className="bg-spotify-surface rounded-xl p-6">
-            <h3 className="text-sm font-semibold text-white mb-3">Component Checklist</h3>
+          <div className="bg-surface-2 border border-edge-subtle rounded-xl p-6">
+            <h3 className="text-[13px] font-semibold text-ink mb-3">Component Checklist</h3>
             <div className="space-y-1.5">
               {referenceLayout.map((type) => {
                 const has = userTypes.includes(type)
                 return (
-                  <div key={type} className="flex items-center gap-2 text-xs">
+                  <div key={type} className="flex items-center gap-2 text-[11px]">
                     {has ? (
-                      <CheckCircle2 size={14} className="text-spotify-green shrink-0" />
+                      <CheckCircle2 size={13} className="text-accent shrink-0" />
                     ) : (
-                      <XCircle size={14} className="text-spotify-text-dim shrink-0" />
+                      <XCircle size={13} className="text-ink-muted shrink-0" />
                     )}
-                    <span className={has ? 'text-white' : 'text-spotify-text-dim'}>
+                    <span className={has ? 'text-ink' : 'text-ink-muted'}>
                       {referenceLabels[type] ?? type}
                     </span>
                   </div>
@@ -147,18 +146,18 @@ export function CompletionScreen() {
           </div>
 
           {/* Tips discovered */}
-          <div className="bg-spotify-surface rounded-xl p-6">
-            <h3 className="text-sm font-semibold text-white mb-3">
-              <Lightbulb size={14} className="inline mr-1 text-spotify-green" />
+          <div className="bg-surface-2 border border-edge-subtle rounded-xl p-6">
+            <h3 className="text-[13px] font-semibold text-ink mb-3">
+              <Lightbulb size={13} className="inline mr-1.5 text-accent" />
               Design Principles ({discoveredTips.length}/{designTips.length})
             </h3>
             <div className="space-y-1.5">
               {designTips.map((tip) => {
                 const found = discoveredTips.includes(tip.id)
                 return (
-                  <div key={tip.id} className="flex items-center gap-2 text-xs">
-                    <span>{found ? tip.emoji : '🔒'}</span>
-                    <span className={found ? 'text-white' : 'text-spotify-text-dim'}>
+                  <div key={tip.id} className="flex items-center gap-2 text-[11px]">
+                    <span className="text-sm">{found ? tip.emoji : '🔒'}</span>
+                    <span className={found ? 'text-ink' : 'text-ink-muted'}>
                       {found ? tip.title : '???'}
                     </span>
                   </div>
@@ -172,21 +171,21 @@ export function CompletionScreen() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="flex items-center justify-center gap-4"
+          transition={{ delay: 0.45, duration: 0.4 }}
+          className="flex items-center justify-center gap-3"
         >
           <button
             onClick={() => setScreen('sandbox')}
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-spotify-surface text-white font-semibold hover:bg-spotify-surface-light transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-surface-2 border border-edge text-ink font-medium text-[13px] hover:bg-surface-3 transition-all duration-150 cursor-pointer"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={15} />
             Keep Editing
           </button>
           <button
             onClick={handleDownload}
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-spotify-green text-spotify-black font-semibold hover:bg-spotify-green-light hover:scale-105 transition-all cursor-pointer"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-accent text-surface-base font-medium text-[13px] hover:bg-accent-hover transition-all duration-150 cursor-pointer"
           >
-            <Download size={16} />
+            <Download size={15} />
             Download Design
           </button>
         </motion.div>

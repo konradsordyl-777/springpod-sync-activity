@@ -15,9 +15,11 @@ export function PropertiesPanel() {
 
   if (!selected || !definition) {
     return (
-      <div className="flex flex-col items-center justify-center h-48 text-spotify-text-dim">
-        <Settings2 size={32} className="mb-3 opacity-50" />
-        <p className="text-sm">Select a component to edit</p>
+      <div className="flex flex-col items-center justify-center h-48 text-ink-muted select-none">
+        <div className="w-10 h-10 rounded-xl bg-surface-2 border border-edge-subtle flex items-center justify-center mb-3">
+          <Settings2 size={18} className="text-ink-muted" />
+        </div>
+        <p className="text-xs text-ink-tertiary">Select a component to edit</p>
       </div>
     )
   }
@@ -25,23 +27,25 @@ export function PropertiesPanel() {
   return (
     <div>
       <div className="flex items-center gap-2 mb-4">
-        <div className="w-2 h-2 rounded-full bg-spotify-green" />
-        <h3 className="text-sm font-semibold text-white">{definition.label}</h3>
+        <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+        <h3 className="text-[13px] font-semibold text-ink">{definition.label}</h3>
       </div>
-      <p className="text-xs text-spotify-text-dim mb-4">{definition.description}</p>
+      <p className="text-[11px] text-ink-tertiary mb-5 leading-relaxed">{definition.description}</p>
 
-      {definition.props.map((propDef) => (
-        <PropertyControl
-          key={propDef.key}
-          definition={propDef}
-          value={selected.props[propDef.key] ?? propDef.defaultValue}
-          onChange={(value) => {
-            updateProp(selected.id, propDef.key, value)
-            if (propDef.type === 'color') setHasChangedColor()
-            if (propDef.type === 'size' || propDef.type === 'slider') setHasResized()
-          }}
-        />
-      ))}
+      <div className="space-y-4">
+        {definition.props.map((propDef) => (
+          <PropertyControl
+            key={propDef.key}
+            definition={propDef}
+            value={selected.props[propDef.key] ?? propDef.defaultValue}
+            onChange={(value) => {
+              updateProp(selected.id, propDef.key, value)
+              if (propDef.type === 'color') setHasChangedColor()
+              if (propDef.type === 'size' || propDef.type === 'slider') setHasResized()
+            }}
+          />
+        ))}
+      </div>
     </div>
   )
 }

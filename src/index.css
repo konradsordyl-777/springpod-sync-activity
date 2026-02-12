@@ -1,16 +1,49 @@
 @import "tailwindcss";
 
 @theme {
+  /* ─── Surface Elevation (dark mode: lighter = higher) ─── */
+  --color-surface-base: #121212;
+  --color-surface-1: #171717;
+  --color-surface-2: #1e1e1e;
+  --color-surface-3: #252525;
+  --color-surface-4: #2a2a2a;
+  --color-surface-5: #333333;
+
+  /* ─── Brand ─── */
+  --color-accent: #1DB954;
+  --color-accent-hover: #1ed760;
+  --color-accent-muted: #1db95426;
+  --color-accent-subtle: #1db95412;
+
+  /* ─── Text Hierarchy ─── */
+  --color-ink: #FFFFFF;
+  --color-ink-secondary: #ffffffb3;
+  --color-ink-tertiary: #ffffff80;
+  --color-ink-muted: #ffffff4d;
+  --color-ink-faint: #ffffff26;
+
+  /* ─── Borders ─── */
+  --color-edge: #ffffff14;
+  --color-edge-subtle: #ffffff0a;
+  --color-edge-strong: #ffffff22;
+  --color-edge-accent: #1db95480;
+
+  /* ─── Semantic ─── */
+  --color-danger: #e34850;
+  --color-danger-muted: #e3485026;
+
+  /* ─── Legacy aliases (keep Tailwind classes working) ─── */
   --color-spotify-green: #1DB954;
   --color-spotify-green-light: #1ed760;
-  --color-spotify-black: #191414;
+  --color-spotify-black: #171717;
   --color-spotify-dark: #121212;
-  --color-spotify-surface: #282828;
-  --color-spotify-surface-light: #3E3E3E;
+  --color-spotify-surface: #1e1e1e;
+  --color-spotify-surface-light: #252525;
   --color-spotify-text: #FFFFFF;
-  --color-spotify-text-sub: #B3B3B3;
-  --color-spotify-text-dim: #727272;
+  --color-spotify-text-sub: #ffffffb3;
+  --color-spotify-text-dim: #ffffff4d;
 
+  /* ─── Typography ─── */
   --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -28,23 +61,29 @@ html, body, #root {
 
 body {
   font-family: var(--font-family-sans);
-  background-color: #121212;
-  color: #FFFFFF;
+  background-color: var(--color-surface-base);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3E3E3E;
-  border-radius: 4px;
+  background: var(--color-surface-4);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #535353;
+  background: var(--color-surface-5);
+}
+
+/* Focus ring utility */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }

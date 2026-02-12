@@ -34,7 +34,7 @@ export function AppShell() {
         setActiveType(null)
       }}
     >
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col bg-surface-base">
         <Toolbar />
         <div className="flex-1 flex overflow-hidden">
           {!previewMode && (
@@ -43,7 +43,7 @@ export function AppShell() {
             </div>
           )}
 
-          <div className="flex-1 overflow-y-auto bg-spotify-dark">
+          <div className="flex-1 overflow-y-auto">
             <Canvas />
           </div>
 

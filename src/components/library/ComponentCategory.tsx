@@ -12,14 +12,14 @@ export function ComponentCategory({ name, components }: Props) {
   const [open, setOpen] = useState(true)
 
   return (
-    <div className="mb-2">
+    <div className="mb-3">
       <button
-        className="flex items-center gap-1.5 w-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-spotify-text-sub hover:text-spotify-text transition-colors"
+        className="flex items-center gap-1.5 w-full px-2 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-ink-muted hover:text-ink-tertiary transition-colors duration-150 cursor-pointer"
         onClick={() => setOpen(!open)}
       >
-        {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+        {open ? <ChevronDown size={10} /> : <ChevronRight size={10} />}
         {name}
-        <span className="text-spotify-text-dim ml-auto">{components.length}</span>
+        <span className="ml-auto text-ink-faint">{components.length}</span>
       </button>
       {open && (
         <div className="flex flex-col gap-1 mt-1">

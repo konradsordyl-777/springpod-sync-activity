@@ -1,13 +1,13 @@
 import { useSandboxStore } from '@/stores/useSandboxStore'
 import { designTips } from '@/data/designTips'
-import { Lightbulb, Lock } from 'lucide-react'
+import { Lock } from 'lucide-react'
 
 export function TipHistory() {
   const discoveredTips = useSandboxStore((s) => s.discoveredTips)
 
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-spotify-text-sub mb-1">
+      <h3 className="text-[10px] font-semibold uppercase tracking-widest text-ink-muted mb-1">
         Design Tips ({discoveredTips.length}/{designTips.length})
       </h3>
       {designTips.map((tip) => {
@@ -15,27 +15,27 @@ export function TipHistory() {
         return (
           <div
             key={tip.id}
-            className={`rounded-lg p-3 transition-colors ${
+            className={`rounded-lg p-3 transition-colors duration-150 ${
               discovered
-                ? 'bg-spotify-surface'
-                : 'bg-spotify-dark border border-white/5'
+                ? 'bg-surface-2 border border-edge-subtle'
+                : 'bg-surface-base border border-edge-subtle'
             }`}
           >
             <div className="flex items-center gap-2 mb-1">
               {discovered ? (
                 <>
                   <span className="text-sm">{tip.emoji}</span>
-                  <span className="text-xs font-semibold text-spotify-green">{tip.title}</span>
+                  <span className="text-[11px] font-semibold text-accent">{tip.title}</span>
                 </>
               ) : (
                 <>
-                  <Lock size={12} className="text-spotify-text-dim" />
-                  <span className="text-xs text-spotify-text-dim">???</span>
+                  <Lock size={10} className="text-ink-muted" />
+                  <span className="text-[11px] text-ink-muted">???</span>
                 </>
               )}
             </div>
             {discovered && (
-              <p className="text-[10px] text-spotify-text-sub leading-relaxed italic">
+              <p className="text-[10px] text-ink-tertiary leading-relaxed italic">
                 {tip.principle}
               </p>
             )}

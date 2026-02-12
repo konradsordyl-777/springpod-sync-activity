@@ -7,16 +7,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = 'primary', size = 'md', children, className = '', ...props }: ButtonProps) {
-  const base = 'inline-flex items-center justify-center font-semibold rounded-full transition-all duration-200 cursor-pointer'
+  const base = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-150 cursor-pointer'
   const variants = {
-    primary: 'bg-spotify-green text-spotify-black hover:bg-spotify-green-light hover:scale-105',
-    secondary: 'bg-spotify-surface text-spotify-text hover:bg-spotify-surface-light',
-    ghost: 'bg-transparent text-spotify-text-sub hover:text-spotify-text',
+    primary: 'bg-accent text-surface-base hover:bg-accent-hover',
+    secondary: 'bg-surface-2 border border-edge text-ink-secondary hover:bg-surface-3 hover:text-ink',
+    ghost: 'bg-transparent text-ink-tertiary hover:text-ink-secondary hover:bg-surface-2',
   }
   const sizes = {
-    sm: 'px-4 py-1.5 text-xs',
-    md: 'px-6 py-2.5 text-sm',
-    lg: 'px-8 py-3.5 text-base',
+    sm: 'px-3 py-1.5 text-xs',
+    md: 'px-5 py-2 text-[13px]',
+    lg: 'px-8 py-3 text-sm',
   }
 
   return (

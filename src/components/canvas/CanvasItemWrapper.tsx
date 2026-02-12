@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { GripVertical, Trash2 } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import { useSandboxStore } from '@/stores/useSandboxStore'
 import type { CanvasComponent } from '@/types'
 import { CanvasItem } from './CanvasItem'
@@ -25,7 +25,7 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.4 : 1,
+    opacity: isDragging ? 0.3 : 1,
   }
 
   const def = componentLibrary.find((c) => c.type === component.type)
@@ -42,7 +42,7 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
 
   if (previewMode) {
     return (
-      <div className={`${widthClass}`}>
+      <div className={widthClass}>
         <CanvasItem type={component.type} props={component.props} />
       </div>
     )
@@ -54,31 +54,33 @@ export function CanvasItemWrapper({ component, previewMode }: Props) {
       style={style}
       {...attributes}
       {...listeners}
-      className={`${widthClass} relative group cursor-grab active:cursor-grabbing rounded-md transition-all ${
-        isSelected ? 'ring-2 ring-spotify-green ring-offset-2 ring-offset-spotify-dark' : 'hover:ring-1 hover:ring-white/20'
+      className={`${widthClass} relative group cursor-grab active:cursor-grabbing rounded-lg transition-all duration-150 ${
+        isSelected
+          ? 'ring-1 ring-accent/60 bg-accent-subtle'
+          : 'hover:bg-surface-2/50'
       }`}
       onClick={(e) => {
         e.stopPropagation()
         selectComponent(component.id)
       }}
     >
-      {/* Delete button - top right inside the component */}
-      <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+      {/* Delete button */}
+      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-10">
         <button
-          className="p-1.5 rounded-full bg-spotify-dark/80 text-spotify-text-sub hover:text-red-400 hover:bg-red-400/10 transition-colors"
+          className="p-1.5 rounded-md bg-surface-3 border border-edge-subtle text-ink-muted hover:text-danger hover:bg-danger-muted hover:border-danger/20 transition-all duration-150"
           onClick={(e) => {
             e.stopPropagation()
             removeComponent(component.id)
           }}
           onPointerDown={(e) => e.stopPropagation()}
         >
-          <Trash2 size={14} />
+          <Trash2 size={12} />
         </button>
       </div>
 
       {/* Component label */}
       {isSelected && def && (
-        <div className="absolute -top-5 left-2 text-[10px] font-medium text-spotify-green bg-spotify-dark px-1.5 py-0.5 rounded">
+        <div className="absolute -top-5 left-3 text-[10px] font-medium tracking-wide text-accent bg-surface-base border border-edge-accent/30 px-2 py-0.5 rounded-md z-10">
           {def.label}
         </div>
       )}
